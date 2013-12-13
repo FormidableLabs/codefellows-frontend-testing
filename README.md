@@ -1,12 +1,10 @@
-SeattleJS - Learn Frontend Testing
-==================================
+Code Fellows - Learn Frontend Testing
+=====================================
 
-Talk presentation and demo materials for my 10/16/2013 [SeattleJS][seattlejs]
-talk, "[Learn Frontend Testing][meetup]".
+Talk presentation and demo materials for my 12/17/2013 [Code Fellows][cf]
+workshop, "Learn Frontend Testing".
 
-[seattlejs]: http://www.meetup.com/seattlejs/
-[meetup]: http://www.meetup.com/seattlejs/events/139993642/
-
+[cf]: https://www.codefellows.org/
 
 Building the Slide Deck
 =======================
@@ -32,12 +30,3 @@ licenses.
 
 All code not otherwise specified is Copyright 2013 Ryan Roemer and
 released under the MIT License.
-
-Tasks
-=====
-* Create a "formidable" theme based on default with red's for links and hovers.
-
-* GH banner
-* Re-enable pager.
-* Remove this section.
-

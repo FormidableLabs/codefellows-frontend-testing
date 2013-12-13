@@ -15,6 +15,14 @@ $linkColorHover: #E7BDB0;
   color: #E7BDB0;
 }
 
+$linkColor: #e7ad52;
+$linkColorHover: lighten( $linkColor, 20% );
+
+.reveal strong {
+  color: #E7BDB0;
+}
+
+
 // Include theme-specific fonts
 @font-face {
   font-family: 'League Gothic';
