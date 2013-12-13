@@ -8,18 +8,11 @@
 @import "../template/settings";
 
 // Links and actions
-$linkColor: #FF766B;
-$linkColorHover: #E7BDB0;
-
-.reveal strong {
-  color: #E7BDB0;
-}
-
 $linkColor: #e7ad52;
 $linkColorHover: lighten( $linkColor, 20% );
 
 .reveal strong {
-  color: #E7BDB0;
+  color: #81BEF7;
 }
 
 
