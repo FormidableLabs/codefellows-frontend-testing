@@ -1,0 +1,23 @@
+extends test-layout
+
+block setup
+  script
+    // Set up Chai and Mocha.
+    window.expect = chai.expect;
+    mocha.setup("bdd");
+
+    // Run tests on window load.
+    window.onload = function () {
+      (window.mochaPhantomJS || mocha).run();
+    };
+  //-
+
+block specs
+  script(src="js/spec/mocha-suite.spec.js")
+  script(src="js/spec/mocha-setup.spec.js")
+  script(src="js/spec/chai.spec.js")
+
+  script(src="js/spec/hello.spec.js")
+  script(src="js/spec/camel.spec.js")
+  script(src="js/spec/camel-spy.spec.js")
+  script(src="js/spec/camel-stub.spec.js")

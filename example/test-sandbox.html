@@ -1,0 +1,32 @@
+
+<html>
+  <head>
+    <title>Frontend Testing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- Application libraries.-->
+    <script src="js/app/hello.js"></script>
+    <script src="js/app/camel.js"></script>
+    <!-- Test styles and libraries.-->
+    <link rel="stylesheet" href="js/lib/mocha.css"/>
+    <script src="js/lib/mocha.js"></script>
+    <script src="js/lib/chai.js"></script>
+    <script src="js/lib/sinon.js"></script>
+    <!-- Test Setup-->
+    <script>
+      // Set up Chai and Mocha.
+      window.expect = chai.expect;
+      mocha.setup("bdd");
+      
+      // Run tests on window load.
+      window.onload = function () {
+        mocha.run();
+      };
+    </script>
+    <!-- Tests.-->
+    <script src="js/spec/sandbox.spec.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>

@@ -1,0 +1,530 @@
+extends layout
+
+block meta
+
+  title SeattleJS - Learn Frontend Testing
+  meta(name='description', content='Learn how to test frontend JavaScript code in your web applications.')
+  meta(name='author', content='Ryan Roemer')
+
+block slides
+
+  section#title.title
+    h1 Learn Frontend Testing
+    h3
+      a(href="http://www.meetup.com/seattlejs/") Seattle JS
+      |  -&nbsp;
+      a(href="http://www.meetup.com/seattlejs/events/139993642/") Oct. 16th, 2013
+    p
+      a(href='http://loose-bits.com') Ryan Roemer
+      |  |&nbsp;
+      a(href='http://twitter.com/ryan_roemer') @ryan_roemer
+    p
+      a(href='http://twitter.com/FormidableLabs') @FormidableLabs
+
+  section
+    section
+      h2 Sponsors
+
+    section
+      div
+        a.image(href="http://formidablelabs.com")
+          img(class="logo-white",
+              alt="Formidable Labs",
+              src="img/sponsors/formidable.png",
+              width="80%")
+
+    section
+      div
+        a.image(href="http://coworking.formidablelabs.com")
+          img(class="logo-white",
+              alt="Coworking",
+              src="img/sponsors/coworking.png",
+              width="100%")
+
+    section
+      div
+        a.image(href="http://redfin.com")
+          img(class="logo-white",
+              alt="Redfin",
+              src="img/sponsors/redfin.png",
+              width="75%")
+
+    section
+      div
+        a.image(href="http://moz.com")
+          img(class="logo-white",
+              alt="Moz",
+              src="img/sponsors/moz-blue.jpg",
+              width="65%")
+
+  section
+    :markdown
+      ## Mentors
+
+      Try to keep pace with the presentation, but side conversations are
+      encouraged and don't let us stop any good directions.
+
+      And, **thanks**!
+
+  section
+    section
+      :markdown
+        ## Motivation
+
+        Web applications are increasingly becoming **frontend heavy**.
+
+        We need to **verify** app logic and behavior, and that
+        means braving the browser.
+
+    section
+      :markdown
+        ## So let's test
+
+        **Backend** is straightforward and easy
+
+        ... but what about the frontend?
+
+    section
+      :markdown
+        ## Frontend testing
+
+        **Frontend** testing is difficult and error-prone.
+
+        * Asynchronous events, timing
+        * Browser idiosyncracies
+        * State of testing technologies
+
+    section
+      h2 But getting better
+      div
+        a.image(href="http://backbone-testing.com")
+          img.book(alt="Backbone.js Testing",
+                   src="img/sponsors/backbone-testing.jpg")
+
+    section
+      p ... so let's get started with a modern frontend test stack.
+
+    section
+      h2 Get the code
+
+      a(href='https://github.com/FormidableLabs/codefellows-frontend-testing')
+        | github.com/FormidableLabs/codefellows-frontend-testing
+
+      //- git clone https://github.com/FormidableLabs/codefellows-frontend-testing.git
+      pre
+        code.text.no-highlight .
+          $ git clone https://github.com/FormidableLabs/
+                      codefellows-frontend-testing.git
+
+  section
+    section
+      :markdown
+        ## Overview
+
+        * Installation and test page
+        * Suites
+        * Assertions
+        * Fakes
+        * Automation
+
+    section
+      :markdown
+        ## We will learn how to
+
+        * Hook frontend JS to tests
+        * Write assertions against behavior
+        * Fake application behavior
+        * Run and verify the tests
+
+    section
+      :markdown
+        ## Things we're **not** going to cover
+
+        * TDD / BDD
+        * Application development
+        * Functional testing
+        * Performance testing
+
+  section
+    section
+      h2 Coding time
+
+      p We're going to say hello:
+      p "<strong>SeattleJS</strong>" &#10142; "<strong>Hello SeattleJS!</strong>"
+      hr(width="50%")
+      p And <a href="http://en.wikipedia.org/wiki/CamelCase">camel case</a> strings:
+      p "<strong>fun-test-time</strong>" &#10142; "<strong>funTestTime</strong>"
+
+    section
+      :markdown
+        ## Set up your project
+
+      pre
+        code.text.no-highlight .
+          # Copy the skeleton application.
+          $ cp -r skeleton MY_APP_NAME
+      //-
+
+    section
+      :markdown
+        ## Project Structure
+
+        Using with the "skeleton" application.
+
+      pre
+        code.text.no-highlight .
+          MY_APP_NAME/
+            js/
+              app/
+                hello.js
+                camel.js
+              lib/
+                chai.js
+                mocha.js
+                mocha.css
+                sinon.js
+            index.html
+      //-
+
+    section
+      h2 Hello!
+      a(href="skeleton/js/app/hello.js") skeleton/js/app/hello.js
+      pre
+        code.javascript
+          include ../skeleton/js/app/hello.js
+
+    section
+      h2 Camel Case
+      a(href="skeleton/js/app/camel.js") skeleton/js/app/camel.js
+      pre
+        code.javascript
+          include ../skeleton/js/app/camel.js
+
+    section
+      h2 Demo
+      a(href="skeleton/index.html") skeleton/index.html
+
+  section
+    section
+      h2 Test harness
+
+    section
+      :markdown
+        ## Test Libraries
+
+        * **[Mocha](http://visionmedia.github.com/mocha/)** (`v1.13.0`): Framework
+        * **[Chai](http://chaijs.com/)** (`v1.7.3`): Assertions
+        * **[Sinon.JS](http://sinonjs.org/)** (`v1.8.1`): Fakes - spies and stubs
+
+    section
+      :markdown
+        ## Directory layout
+
+        A combined structure.
+
+      pre
+        code.text.no-highlight .
+          MY_APP_NAME/
+            js/
+              app/
+              lib/
+              spec/
+                hello.spec.js
+                *.spec.js
+            test.html
+            index.html
+      //-
+
+    section
+      :markdown
+        ## The test page
+
+        Create a test "driver" web page.
+
+        [example/test.html](example/test.html)
+
+      pre
+        code.text.no-highlight .
+          $ touch MY_APP_NAME/test.html
+      //-
+
+    section
+      :markdown
+        ## test.html
+
+      pre.html .
+        <html>
+          <head>
+            <title>Frontend Testing</title>
+            <!-- Application libraries. -->
+            <script src="js/app/hello.js"></script>
+            <script src="js/app/camel.js"></script>
+            <!-- Test styles and libraries. -->
+            <link rel="stylesheet"
+                  href="js/lib/mocha.css" />
+            <script src="js/lib/mocha.js"></script>
+            <script src="js/lib/chai.js"></script>
+            <script src="js/lib/sinon.js"></script>
+      //-
+
+    section
+      :markdown
+        ## test.html
+
+      pre.html.no-indent .
+        &nbsp;   <!-- Test Setup -->
+            <script>
+              // Set up Chai and Mocha.
+              window.expect = chai.expect;
+              mocha.setup("bdd");
+
+              // Run tests on window load.
+              window.onload = function () {
+                mocha.run();
+              };
+            </script>
+      //-
+
+    section
+      :markdown
+        ## test.html
+
+      pre.html.no-indent .
+        &nbsp;   <!-- Tests. -->
+            <!-- ... spec script includes go here ... -->
+        &nbsp; &lt;/head>
+          <body>
+            <div id="mocha"></div>
+          </body>
+        </html>
+      //-
+
+      :markdown
+        [example/test-empty.html](example/test-empty.html)
+
+  section
+    section
+      :markdown
+        ## Mocha Suites, Specs
+
+        * **Spec**: A **test**.
+        * **Suite**: A collection of **specs** or **suites**.
+
+    section
+      :markdown
+        ## Suites, Specs
+
+        [test-mocha.html](example/test-mocha.html) |
+        [mocha-suite.spec.js](example/js/spec/mocha-suite.spec.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/mocha-suite.spec.js
+
+    section
+      :markdown
+        ## Setup, Teardown
+
+        [test-mocha.html](example/test-mocha.html) |
+        [mocha-setup.spec.js](example/js/spec/mocha-setup.spec.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/mocha-setup.spec.js
+
+  section
+    section
+      :markdown
+        ## Chai Assertions
+
+        * Natural language syntax.
+        * Chained assertions.
+
+    section
+      :markdown
+        ## Chai API
+
+        The ["bdd" API](http://chaijs.com/api/bdd/):
+
+        * **Chains**: `to`, `be`, `been`, `have`
+        * **Groups**: `and`
+        * **Basics**: `a`, `equal`, `length`, `match`
+
+    section
+      :markdown
+        ## Hello!
+
+        [test-hello.html](example/test-hello.html) |
+        [hello.spec.js](example/js/spec/hello.spec.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/hello.spec.js
+
+    section
+      :markdown
+        ## Camel Case
+
+        [test-camel.html](example/test-camel.html) |
+        [camel.spec.js](example/js/spec/camel.spec.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/camel.spec.js
+
+    section
+      :markdown
+        ## More Chai
+
+        [test-chai.html](example/test-chai.html) |
+        [chai.spec.js](example/js/spec/chai.spec.js) |
+        [chai-fail.spec.js](example/js/spec/chai-fail.spec.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/chai.spec.js
+          include ../example/js/spec/chai-fail.spec.js
+
+  section
+    section
+      :markdown
+        ## Sinon.JS Fakes
+
+        Dependencies, complexities? Fake it!
+
+        * [**Spies**](http://sinonjs.org/docs/#spies): *Observe* function behavior.
+        * [**Stubs**](http://sinonjs.org/docs/#stubs): *Spies* that *replace* behavior.
+        * [**Fake Server**](http://sinonjs.org/docs/#server): Override `$.ajax`, etc.
+
+    section
+      :markdown
+        ## Sinon.JS [Spy](http://sinonjs.org/docs/#spies)
+
+        [test-sinon.html](example/test-sinon.html) |
+        [camel-spy.spec.js](example/js/spec/camel-spy.spec.js) |
+        [camel.js](example/js/app/camel.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/camel-spy.spec.js
+
+    section
+      :markdown
+        ## Sinon.JS [Stub](http://sinonjs.org/docs/#stubs)
+
+        [test-sinon.html](example/test-sinon.html) |
+        [camel-stub.spec.js](example/js/spec/camel-stub.spec.js) |
+        [camel.js](example/js/app/camel.js)
+
+      pre
+        code.javascript
+          include ../example/js/spec/camel-stub.spec.js
+
+  section
+    section
+      :markdown
+        ## Automation
+
+        Drive our frontend tests with
+        [**PhantomJS**](http://phantomjs.org/) using
+        [**Mocha-PhantomJS**](https://github.com/metaskills/mocha-phantomjs)
+
+    section
+      :markdown
+        ## Prep test.html
+
+        Update the [test.html](example/test.html) file:
+
+      pre
+        code.javascript .
+          window.onload = function () {
+            (window.mochaPhantomJS || mocha).run();
+          };
+      //-
+
+    section
+      :markdown
+        ## Headless!
+
+        Install and drive [tests](example/test.html) from the command line:
+
+      pre
+        code.text.no-highlight .
+          $ npm install mocha-phantomjs
+          $ node_modules/.bin/mocha-phantomjs \
+            MY_APP_NAME/test.html
+      //-
+
+    section
+      :markdown
+        ... and that's all for now!
+
+  section
+    section
+      :markdown
+        ## What we've covered
+
+        * Test harness
+        * Suites, specs
+        * Assertions
+        * Fakes
+        * Automation
+
+    section
+      :markdown
+        ## Additional Topics
+
+        * Advanced testing: DOM, fixtures
+        * TDD / BDD
+        * Functional testing
+        * Performance testing
+        * Continuous Integration:
+          ([Travis CI](https://travis-ci.org/FormidableLabs/codefellows-frontend-testing))
+
+  section#thanks
+    h1 Thanks!
+    p.last
+      a(href="http://loose-bits.com") Ryan Roemer
+      |  |&nbsp;
+      a(href="http://twitter.com/ryan_roemer") @ryan_roemer
+
+    div.last-links
+      div.next
+        a(href="http://formidablelabs.github.com/codefellows-frontend-testing")
+          | bit.ly/frontend-testing
+      div.next
+        a(href="https://github.com/FormidableLabs/codefellows-frontend-testing")
+          | bit.ly/frontend-testing-src
+      div
+        a(href="http://backbone-testing.com") backbone-testing.com
+
+  //- section#banner.title
+  //-   h1 Frontend Testing
+  //-   p
+  //-     a(href='http://loose-bits.com') Ryan Roemer
+  //-     |  |&nbsp;
+  //-     a(href='http://twitter.com/FormidableLabs') @FormidableLabs
+  //-     |  |&nbsp;
+  //-     a(href="http://www.meetup.com/seattlejs/") Seattle JS
+  //-   br
+  //-   p
+  //-     | Get the source: &nbsp;
+  //-     a(href="https://github.com/FormidableLabs/codefellows-frontend-testing")
+  //-       | bit.ly/frontend-testing-src
+  //-   //- git clone https://github.com/FormidableLabs/codefellows-frontend-testing.git
+  //-   pre
+  //-     code.text.no-highlight .
+  //-       $ git clone https://github.com/FormidableLabs/
+  //-                   codefellows-frontend-testing.git
+  //-   //-
+
+  //- section#sandbox
+  //-   :markdown
+  //-     ## Sandbox!
+
+  //-     [test-sandbox.html](example/test-sandbox.html) |
+  //-     [sandbox.js](example/js/app/sandbox.js)
+
+  //-   pre
+  //-     code.javascript
+  //-       include ../example/js/spec/sandbox.spec.js

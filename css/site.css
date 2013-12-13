@@ -1,0 +1,148 @@
+/* Page */
+.reveal {
+  font-size: 2.5em;
+}
+@media print {
+  .reveal {
+    font-size: 2.0em;
+  }
+}
+
+/* Elements */
+.reveal blockquote:before,
+.reveal blockquote:after {
+  content: "" !important;
+  quotes: default;
+}
+.reveal blockquote p {
+  text-align: left;
+  font-size: 0.9em;
+}
+.reveal h1 {
+  font-size: 4.0em;
+}
+.reveal h2 {
+  font-size: 3.0em;
+}
+.reveal h2.tip {
+  color: #6cf;
+}
+.reveal h3 {
+  font-size: 2.25em;
+}
+.reveal .title h3 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.reveal ul {
+  text-align: left;
+}
+.reveal ul li {
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+.reveal p,
+.reveal code.p {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20px
+}
+.reveal pre code {
+  line-height: 1.2em;
+  font-size: 1.45em;
+}
+
+.reveal section div a.image {
+  color: #ccc;
+}
+.reveal section div img.logo-white {
+  background: #fff;
+  border: 15px solid #fff;
+  -webkit-border-radius: 15px;
+     -moz-border-radius: 15px;
+      border-top-radius: 15px;
+}
+.reveal section div img.book {
+  border: 2px solid #333;
+  max-width: 350px;
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 10px 10px 20px rgba(50, 50, 50, 0.85);
+     -moz-box-shadow: 10px 10px 20px rgba(50, 50, 50, 0.85);
+          box-shadow: 10px 10px 20px rgba(50, 50, 50, 0.85);
+}
+.reveal section div.last {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+      border-top-radius: 10px;
+  background-color: #e7ad52;
+}
+.reveal section div.last-links {
+  line-height: 1.4em;
+  padding: 5px;
+  width: 50%;
+
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+
+  border: 3px solid #ccc;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+}
+
+.reveal table {
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 10px;
+}
+.reveal table th,
+.reveal table td {
+  padding: 6px;
+}
+.reveal table th {
+  background: #e7ad52;
+  color: #000;
+  text-shadow: none;
+  font-weight: bold;
+}
+.reveal table th {
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+      border-top-radius: 10px;
+}
+
+/* Reveal.js Overrides */
+.reveal .roll {
+  -webkit-perspective: none;
+     -moz-perspective: none;
+      -ms-perspective: none;
+          perspective: none;
+}
+
+/* Custom */
+.image-left {
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid yellow;
+  width: 50%;
+}
+
+.image-right {
+  float: right;
+  text-align: center;
+  vertical-align: middle;
+  width: 50%;
+}
